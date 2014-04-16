@@ -1,0 +1,65 @@
+<config>
+	<export id="alumni-export" name="校友导出">
+		<fields ref="alumni"/>
+	</export>
+	<import id="alumni-import" name="校友导入">
+		<bean>cn.icinfo.zuaa.model.Alumni</bean>
+		<fields ref="alumni" />
+	</import>
+	<fields id="alumni">
+		<!--
+		最复杂的Field例子
+		<field name="id" type="integer" text="校友id">
+			<import-convert class=""><![CDATA[
+			这里使用mvel脚本进行编写，mvel可以直接调用java方法，一般用来解决复杂的转换问题。
+			如果不行，则可以自己写Java类实现转换。
+			]]></import-convert>
+			<export-convert class=""></export-convert>
+		</field>
+		最简单的Field例子,其中type为integer,boolean,double,float,date,string,short,long,如果懒惰，则可以直接
+		不写type，此时缺省为string，系统会根据实际的Field类型，通过反射机制实现自动转换。
+		<field name="fieldName" text="fieldText" />
+		 -->
+		<field name="id" type="long" text="校友id" />
+		<field name="level" text="级别" />
+		<field name="name" text="姓名" />
+		<field name="birthday" text="出生日期" />
+		<field name="fullTime" type="boolean" text="全日制" >
+			<export-convert class="script"><![CDATA[
+			@if{fullTime=='1'}是@elseif{fullTime=='0'}否@end{}
+			]]>
+			</export-convert>
+		</field>
+		<field name="sex" text="性别" />
+		<field name="enName" text="英文名" />
+		<field name="nativePlace" text="籍贯" />
+		<field name="cardNo" text="身份证号" />
+		<field name="beginDate" text="入学年月" />
+		<field name="graduateDate" text="毕业年月" />
+		<field name="speciality" text="专业" />
+		<field name="education" text="学历" />
+		<field name="banji" text="班级" />
+		<field name="workDate" text="工作年月" />
+		<field name="depart" text="部处" />
+		<field name="trainingDate" text="培训年月" />
+		<field name="areaName" text="地区" />
+		<field name="unit" text="工作单位" />
+		<field name="job" text="职务" />
+		<field name="jobLevel" text="职称" />
+		<field name="trade" text="行业范围" />
+		<field name="needMagazine" type="boolean" text="赠阅《浙大校友》">
+			<export-convert class="script"><![CDATA[
+			format="@if{needMagazine=='1'}是@elseif{needMagazine=='0'}否@end{}">
+			]]>
+			</export-convert>
+		</field>
+		<field name="fax" text="传真" />
+		<field name="homePage" text="个人主页" />
+		<field name="qq" text="QQ" />
+		<field name="msn" text="MSN" />
+		<field name="address" text="地址" />
+		<field name="zip" text="邮编" />
+		<field name="asset" text="总资产" />
+		<field name="associationIds" text="校友会id" />
+	</fields>	
+</config>
